@@ -1,10 +1,10 @@
 import React from 'react';
-import { Header } from './components/header';
+import { Source } from './source';
 
 export const App = () => {
   return (
     <>
-      <Header />
+      <Source />
     </>
   )
 };
