@@ -7,7 +7,7 @@ const week = props.range.slice(0,7);
 
     return (
         <div className="forecast">
-            { week.map( (day, index) => <Day key = { day.day } day = {day} index = {index} setIsShowing = { props.setIsShowing } isShowing = { props.isShowing }/> ) }
+            {(week.length ===0) ? <p className="message">По заданным критериям нет доступных дней!</p> : week.map( (day, index) => <Day key = { day.day } day = {day} index = {index} setIsShowing = { props.setIsShowing } isShowing = { props.isShowing }/> ) }
         </div>
     );
 };

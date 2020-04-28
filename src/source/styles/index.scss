@@ -150,7 +150,9 @@ main {
   display: inline-flex;
   align-items: center;
   margin-bottom: 25px;
+  
 }
+
 
 .filter .checkbox:hover {
   cursor: pointer;
@@ -171,7 +173,9 @@ main {
   position: absolute;
   right: 7px;
 }
-
+.filter .checkbox.blocked {
+    cursor: default;
+}
 .filter .custom-input {
   margin-bottom: 26px;
 }
@@ -201,6 +205,16 @@ main {
   text-align: center;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+ 
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
 .filter button {
   background-color: $color2;
   border: none;
@@ -212,6 +226,13 @@ main {
   letter-spacing: 1px;
   color: $color1;
   text-transform: uppercase;
+  &:disabled {
+    opacity: .3;
+    &:hover {
+        cursor: auto;
+        background-color: #c584bc;
+    }
+  }
 }
 
 .filter button:hover {
@@ -306,4 +327,15 @@ main {
   background-image: url("../assets/weather-icon-sunny.png");
   background-size: contain;
   background-repeat: no-repeat;
+}
+.forecast .message {
+    font-family: Roboto,sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    color: #fff;
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
 }

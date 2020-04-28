@@ -3,13 +3,14 @@ import moment from 'moment';
 
 export const Day = (props) => {
     const theDay = Object(props.currentDay[props.isShowing]);
-    return (
+    
+    return (Object.keys(theDay).length !== 0) ? (
         <>
             <div className="head">
                 <div className="icon cloudy"></div>
                 <div className="current-date">
-                    <p>{ moment(theDay.day).format('dddd') }</p>
-                    <span>{ moment(theDay.day).format('DD MMMM') }</span>
+                    <p>{ moment(theDay.day).utc().format('dddd') }</p>
+                    <span>{ moment(theDay.day).utc().format('DD MMMM') }</span>
                 </div>
             </div>
             <div className="current-weather">
@@ -20,5 +21,5 @@ export const Day = (props) => {
                 </p>
             </div>
         </>
-    );
+    ) : (<></>)
 };

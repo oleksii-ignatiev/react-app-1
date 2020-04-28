@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { forcastActions } from '../actions';
 
-export const useForcastFetch = (days = 14) => {
+export const useForcastFetch = (DEFAULT_NUMBER_OF_DAYS = 14) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(forcastActions.fetchAsync(days));
-    }, [dispatch, days]);
+        dispatch(forcastActions.fetchAsync(DEFAULT_NUMBER_OF_DAYS));
+    }, [dispatch, DEFAULT_NUMBER_OF_DAYS]);
 
     const {
         range,
