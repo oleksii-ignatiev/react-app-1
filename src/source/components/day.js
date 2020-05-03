@@ -1,16 +1,16 @@
 import React from 'react';
-import moment from 'moment';
+import { momentutc } from '../init/moment';
 
 export const Day = (props) => {
     const theDay = Object(props.currentDay[props.isShowing]);
     
-    return (Object.keys(theDay).length !== 0) ? (
+    return ( theDay.day ) ? (
         <>
             <div className="head">
                 <div className="icon cloudy"></div>
                 <div className="current-date">
-                    <p>{ moment(theDay.day).utc().format('dddd') }</p>
-                    <span>{ moment(theDay.day).utc().format('DD MMMM') }</span>
+                    <p>{ momentutc(theDay.day).format('dddd') }</p>
+                    <span>{ momentutc(theDay.day).format('DD MMMM') }</span>
                 </div>
             </div>
             <div className="current-weather">

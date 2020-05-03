@@ -10,7 +10,7 @@ export const Temperature = (props) => {
     return (
         <p className="custom-input">
             <label htmlFor = { props.id }>{ props.label }</label>
-            <input id = { props.id } type="number" value = { props.minTemp ? props.minTemp : props.maxTemp ? props.maxTemp : '' } disabled = { !props.isSubmit } onChange = { handleChange }/>
+            <input id = { props.id } type="text" value = { props.minTemp ? props.minTemp : props.maxTemp ? props.maxTemp : '' } disabled = { !props.isSubmit } onChange = { handleChange }/>
         </p>
     );
 };

@@ -14,17 +14,11 @@ export const Filter = (props) => {
     
     const submit = () => {
         if (isSubmit) {
-            let filteredChecked, filterMaxTemp, filterMinTemp
-            if (isChecked) {
-                filteredChecked = store.getState().forcast.range.filter( (e) => e.type === isChecked);
-            }
-            if (maxTemp) {
-                filterMaxTemp = ( filteredChecked ) ? filteredChecked.filter( (e) => e.temperature <= maxTemp ) : store.getState().forcast.range.filter( (e) => e.temperature <= maxTemp);
-            }
-            if (minTemp) {
-                filterMinTemp = ( filterMaxTemp ) ? filterMaxTemp.filter( (e) => e.temperature >= minTemp ) : ( filteredChecked ) ? filteredChecked.filter( (e) => e.temperature >= minTemp ) : store.getState().forcast.range.filter( (e) => e.temperature >= minTemp);
-            }
-            const filtered = (minTemp) ? filterMinTemp : (maxTemp) ? filterMaxTemp : (isChecked) ? filteredChecked : store.getState().forcast.range;
+            let filtered = store.getState().forcast.range;
+            
+            if (isChecked) filtered = filtered.filter( (e) => e.type === isChecked );
+            if (maxTemp) filtered = filtered.filter( (e) => e.temperature <= maxTemp );
+            if (minTemp) filtered = filtered.filter( (e) => e.temperature >= minTemp );
             
             props.setfilteredForcast(filtered);
 
