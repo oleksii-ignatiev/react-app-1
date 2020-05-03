@@ -1,5 +1,5 @@
 import React from 'react';
-import { momentutc } from '../init/moment';
+import moment from 'moment';
 import cx from "classnames";
 
 export const Day = (props) => {
@@ -15,7 +15,7 @@ export const Day = (props) => {
 
     return (
         <div className={ dayCX } onClick = { () => toggle(props.index) } >
-            <p>{ momentutc(currentDay.day).format('dddd') }</p>
+            <p>{ moment(currentDay.day).format('dddd') }</p>
             <span>{ currentDay.temperature }</span>
         </div>
     );

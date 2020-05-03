@@ -1,4 +1,5 @@
 import { types } from './types';
+import moment from 'moment';
 
 const initialState = {
     range: [],
@@ -15,7 +16,7 @@ export const forcastReducer = (state = initialState, { type, payload }) => {
         case types.FORCAST_SET_FETCHING_ERROR:
             return { ...state, isError: payload, range: [] };
         case types.FORCAST_FILL:
-            return { ...state, range: payload, isError: false };
+            return { ...state, range: payload.map((element) => ({...element, day: moment.utc(element.day)})), isError: false };
 
         default:
             return state;

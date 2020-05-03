@@ -1,5 +1,5 @@
 import React from 'react';
-import { momentutc } from '../init/moment';
+import moment from 'moment';
 
 export const Day = (props) => {
     const theDay = Object(props.currentDay[props.isShowing]);
@@ -9,8 +9,8 @@ export const Day = (props) => {
             <div className="head">
                 <div className="icon cloudy"></div>
                 <div className="current-date">
-                    <p>{ momentutc(theDay.day).format('dddd') }</p>
-                    <span>{ momentutc(theDay.day).format('DD MMMM') }</span>
+                    <p>{ moment(theDay.day).format('dddd') }</p>
+                    <span>{ moment(theDay.day).format('DD MMMM') }</span>
                 </div>
             </div>
             <div className="current-weather">
