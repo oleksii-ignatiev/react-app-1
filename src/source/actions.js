@@ -50,5 +50,46 @@ export const forcastActions = Object.freeze({
             dispatch(forcastActions.setFetchingError(error));
         }
         dispatch(forcastActions.stopFetching());
+    },
+
+    setIsSubmit: (payload) => {
+        return {
+            type: types.IS_SUBMIT_SET,
+            payload: payload
+        }
+    },
+
+    setIsChecked: (payload) => {
+        return {
+            type: types.IS_CHECKED_SET,
+            payload: payload
+        }
+    },
+
+    setMaxTemp: (payload) => {
+        return {
+            type: types.MAX_TEMPERATURE_SET,
+            payload: payload
+        }
+    },
+
+    setMinTemp: (payload) => {
+        return {
+            type: types.MIN_TEMPERATURE_SET,
+            payload: payload
+        }
+    },
+
+    setButtonValue: (payload) => {
+        return {
+            type: types.BUTTON_VALUE_SET,
+            payload: payload
+        }
+    },
+
+    setInitState: () => {
+        return {
+            type: types.FORCAST_INIT_STATE
+        }
     }
 });

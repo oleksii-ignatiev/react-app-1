@@ -205,6 +205,13 @@ main {
   text-align: center;
 }
 
+.filter .custom-input span {
+    display: block;
+    color: darkmagenta;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

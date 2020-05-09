@@ -1,84 +1,65 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { CheckField } from './checkField';
 import { Temperature } from './temperatureField';
+
 import { store } from '../init/store';
+import { useDispatch } from 'react-redux';
+import { forcastActions } from '../actions';
 
 export const Filter = (props) => {
-    const [isChecked, setIsChecked] = useState('');
-    const [maxTemp, setMaxTemp] = useState(null);
-    const [minTemp, setMinTemp] = useState(null);
-    const [isTemperature, setIsTemperature] = useState(0);
-    const [isSubmit, setIsSubmit] = useState(true);
-    const [buttonValue, setButtonValue] = useState('Отфильтровать');
+    const state = store.getState().forcast;
+    const dispatch = useDispatch();
     
     const submit = () => {
-        if (isSubmit) {
+        if (state.isSubmit) {
             let filtered = store.getState().forcast.range;
             
-            if (isChecked) filtered = filtered.filter( (e) => e.type === isChecked );
-            if (maxTemp) filtered = filtered.filter( (e) => e.temperature <= maxTemp );
-            if (minTemp) filtered = filtered.filter( (e) => e.temperature >= minTemp );
+            if (state.isChecked) filtered = filtered.filter( (e) => e.type === state.isChecked );
+            if (state.maxTemp) filtered = filtered.filter( (e) => e.temperature <= state.maxTemp );
+            if (state.minTemp) filtered = filtered.filter( (e) => e.temperature >= state.minTemp );
             
             props.setfilteredForcast(filtered);
-
             props.setIsfiltered(1);
-            setIsSubmit(!isSubmit);
-            setButtonValue('Сбросить'); 
+            
+            dispatch(forcastActions.setIsSubmit(!state.isSubmit));
+            dispatch(forcastActions.setButtonValue('Сбросить'));
+            
         } else {
+            dispatch(forcastActions.fetchAsync(14));
             props.setIsfiltered(0);
-            setIsSubmit(!isSubmit);
-            setIsChecked('');
-            setIsTemperature(0);
-            setMinTemp(null);
-            setMaxTemp(null);
-            setButtonValue('Фильтровать');
         }
     }
     
     return (
         <div className="filter">
-            <CheckField 
-                isChecked = { isChecked } 
-                setIsChecked = { setIsChecked } 
-                isSubmit = { isSubmit } 
+            <CheckField
+                state = { state } 
                 id = "cloudy" 
                 value = "Облачно"
             />
-            <CheckField 
-                isChecked = { isChecked } 
-                setIsChecked = { setIsChecked } 
-                isSubmit = { isSubmit } 
+            <CheckField
+                state = { state }
                 id = "sunny" 
                 value = "Солнечно"
             />
-            <CheckField 
-                isChecked = { isChecked } 
-                setIsChecked = { setIsChecked } 
-                isSubmit = { isSubmit } 
+            <CheckField
+                state = { state }
                 id = "rainy" 
                 value = "Пасмурно"
             />
             <Temperature 
-                isSubmit = { isSubmit }
-                isTemperature = { isTemperature }
-                setIsTemperature = { setIsTemperature } 
-                minTemp = { minTemp }
-                setMinTemp = { setMinTemp }
+                state = { state }
                 label = "Минимальная температура" 
                 id = "min-temperature"
             />
             <Temperature 
-                isSubmit = { isSubmit } 
-                isTemperature = { isTemperature } 
-                setIsTemperature = { setIsTemperature } 
-                maxTemp = { maxTemp } 
-                setMaxTemp = { setMaxTemp } 
+                state = { state }
                 label = "Максимальная температура" 
                 id = "max-temperature"
             />
             
-            <button disabled = { !isChecked && !isTemperature } onClick = { submit } >{ buttonValue }</button>
+            <button disabled = { !(state.isChecked || state.minTemp || state.maxTemp) } onClick = { submit } >{ state.buttonValue }</button>
         </div>
     );
 };

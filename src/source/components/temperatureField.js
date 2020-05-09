@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { useDispatch } from 'react-redux';
+import { forcastActions } from '../actions';
+
 
 export const Temperature = (props) => {
-    let errorJSX;
-    const handleChange = (event) => {
-        event.target.value ? props.setIsTemperature(1) : props.setIsTemperature(0);
-        props.setMinTemp ? props.setMinTemp(event.target.value) : props.setMaxTemp(event.target.value);
-        // console.log(event.target.value.match(/^[0-9]*$/gi));
-        if ( event.target.value.match(/^[0-9]*$/gi) === null ) {
-            errorJSX = <p>Error</p>
-        }
+    const [isError, setIsError] = useState(false);
+    const dispatch = useDispatch();
+    
+    const handleChange = (id, event) => {
+        (id === 'min-temperature') ? dispatch(forcastActions.setMinTemp(event.target.value)) : dispatch(forcastActions.setMaxTemp(event.target.value));
+        setIsError(event.target.value && !event.target.value.match(/^[0-9]+[.,]?[0-9]*$/gi));
     }
 
     return (
         <p className="custom-input">
             <label htmlFor = { props.id }>{ props.label }</label>
-            <input id = { props.id } type="text" value = { props.minTemp ? props.minTemp : props.maxTemp ? props.maxTemp : '' } disabled = { !props.isSubmit } onChange = { handleChange }/>
-            { errorJSX }
+            <input id = { props.id } type="text" value = { props.id === 'min-temperature' ? props.state.minTemp : props.state.maxTemp } disabled = { !props.state.isSubmit } onChange = { (event) => handleChange( props.id, event) }/>
+            { isError && <span>Should ba a number with "." or "," decimal deviders</span> }
         </p>
     );
 };
