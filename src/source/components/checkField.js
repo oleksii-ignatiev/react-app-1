@@ -9,12 +9,12 @@ export const CheckField = (props) => {
      
     const checkCX = cx({
         'checkbox': true,
-        'selected': (props.id === props.state.isChecked) ? true : false,
-        'blocked': !props.state.isSubmit ? true : false
+        'selected': (props.id === props.forcast.isChecked) ? true : false,
+        'blocked': !props.forcast.isSubmit ? true : false
     });
 
     const toggle = () => {
-        if (props.state.isSubmit) dispatch(forcastActions.setIsChecked(props.id));
+        if (props.forcast.isSubmit) dispatch(forcastActions.setIsChecked(props.id));
     }
     return (
         <span className={ checkCX } onClick = { () => toggle() } >{ props.value }</span>

@@ -9,14 +9,18 @@ export const Temperature = (props) => {
     const dispatch = useDispatch();
     
     const handleChange = (id, event) => {
-        (id === 'min-temperature') ? dispatch(forcastActions.setMinTemp(event.target.value)) : dispatch(forcastActions.setMaxTemp(event.target.value));
+        if (id === 'min-temperature') {
+            dispatch(forcastActions.setMinTemp(event.target.value));
+        } else { 
+            dispatch(forcastActions.setMaxTemp(event.target.value));
+        }
         setIsError(event.target.value && !event.target.value.match(/^[0-9]+[.,]?[0-9]*$/gi));
     }
 
     return (
         <p className="custom-input">
             <label htmlFor = { props.id }>{ props.label }</label>
-            <input id = { props.id } type="text" value = { props.id === 'min-temperature' ? props.state.minTemp : props.state.maxTemp } disabled = { !props.state.isSubmit } onChange = { (event) => handleChange( props.id, event) }/>
+            <input id = { props.id } type="text" value = { props.id === 'min-temperature' ? props.forcast.minTemp : props.forcast.maxTemp } disabled = { !props.forcast.isSubmit } onChange = { (event) => handleChange( props.id, event) }/>
             { isError && <span>Should ba a number with "." or "," decimal deviders</span> }
         </p>
     );
